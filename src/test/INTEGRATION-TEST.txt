@@ -49,16 +49,16 @@ Steps to follow when executing the Test Suite:
 	i) 		Using the URL "https://login.mailchimp.com/signup?" create a MailChimp online account.
 	ii)		Once an account is created a verification mail will be send to your mail account. Please click the Active Account URL link in the mail.
 	iii) 	Once you have click the mail link it would take you to another page to finalize your MailChimp account creation.
-	iv)	    Use the credentials given by you to login into MailChimp account and Click your profile name to expand the Account Panel, and choose Account.
-	v)		Click the Extras drop-down menu and choose API keys.
-	vi)		Copy an existing API key or click the Create A Key button.
-    vii)	Name your key descriptively, so you know what application uses that key.
+	iv)	Use the credentials given by you to login into MailChimp account and Click your profile name to expand the Account Panel, and choose Account.
+	v)	Click the Extras drop-down menu and choose API keys.
+	vi)	Copy an existing API key or click the Create A Key button.
+        vii)	Name your key descriptively, so you know what application uses that key.
 	viii) 	Create at least two Lists in the Mailchimp account you created before executing the Test Suite for the first time.
-			(Once you login to your Mailchimp account, on your Welcome Screen, click on Lists on the left pane and then Click Create List to create lists)
+		(Once you login to your Mailchimp account, on your Welcome Screen, click on Lists on the left pane and then Click Create List to create lists)
 			
  5. Update the MailChimp properties file at location "{MAILCHIMP_CONNECTOR_HOME}/src/test/resources/artifacts/ESB/connector/config" as below.
 	
-	i)		apiUrl 									- 	Base endpoint URL of the Mailchimp API. Use the format "https://[dc].api.mailchimp.com" where <dc> is the the portion after the dash in your API Key. (e.g https://us2.api.mailchimp.com)
+	i)     apiUrl 									- 	Base endpoint URL of the Mailchimp API. Use the format "https://[dc].api.mailchimp.com" where <dc> is the the portion after the dash in your API Key. (e.g https://us2.api.mailchimp.com)
 	ii)		apiKey									-	Use the api key obtained in Step 4(v).
 	iii)	createTemplateMandatoryName				-	Name given for Template created in Mandatory Case.
 	iv)		createTemplateOptionalName				-	Name given for Template created in Optional Case.
@@ -94,5 +94,3 @@ Steps to follow when executing the Test Suite:
          $ mvn clean install
 	  
 	  Note:- Account is in Trial mode (can only send campaigns to less than 100 emails).
-
-		
