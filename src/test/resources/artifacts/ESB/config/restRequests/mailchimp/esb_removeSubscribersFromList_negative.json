@@ -1,9 +1,0 @@
-{
-    "apiUrl": "%s(apiUrl)",
-    "apiKey":"%s(apiKey)",
-    "format": "json",
-    "listId": "%s(listId)",
-    "batch": [{
-	    		"email": "INVALID@INVALID.com"
-	    	}]
-}

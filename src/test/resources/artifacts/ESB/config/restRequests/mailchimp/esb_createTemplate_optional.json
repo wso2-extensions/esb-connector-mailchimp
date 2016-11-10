@@ -1,8 +1,0 @@
-{
-    "apiUrl": "%s(apiUrl)",
-	"apiKey":"%s(apiKey)",
-	"format": "json",
-    "name": "%s(createTemplateOptionalName)",
-    "html": "%s(createTemplateHTMLOptional)",
-    "folderId": "%s(folderId)"
-}

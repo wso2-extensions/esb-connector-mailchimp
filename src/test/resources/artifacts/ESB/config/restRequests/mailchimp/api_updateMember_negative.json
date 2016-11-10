@@ -1,8 +1,0 @@
-{
-   "apikey":"%s(apiKey)",
-   "id": "%s(listId)",
-   "email": {
-        "email": "%s(email)"
-    },
-    "email_type":"invalid"
-}
