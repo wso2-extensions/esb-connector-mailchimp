@@ -42,7 +42,7 @@ public class MailchimpConnectorIntegrationTest extends ConnectorIntegrationTestB
 	@BeforeClass(alwaysRun = true)
 	public void setEnvironment() throws Exception {
 
-		init("mailchimp-connector-2.0.0");
+		init("mailchimp-connector-2.0.1-SNAPSHOT");
 		esbRequestHeadersMap.put("Content-Type", "application/json");
 		apiRequestHeadersMap.putAll(esbRequestHeadersMap);
 		apiRequestHeadersMap.put("Authorization", "OAuth " + connectorProperties.getProperty("accessToken"));
