@@ -29,7 +29,7 @@
         <property name="uri.var.count" expression="$func:count"/>
         <property name="uri.var.offset" expression="$func:offset"/>
         <script language="js">
-            <![CDATA[
+        <![CDATA[
             var fields = mc.getProperty('uri.var.fields');
             var excludeFields = mc.getProperty('uri.var.excludeFields');
             var count = mc.getProperty('uri.var.count');
@@ -52,7 +52,7 @@
                 urlQuery = '?' + urlQuery.toString().substring(0, urlQuery.toString().lastIndexOf("&"));
                 mc.setProperty('uri.var.urlQuery', urlQuery);
             }
-         ]]>
+        ]]>
         </script>
         <property name="Accept-Encoding" scope="transport" action="remove"/>
         <filter source="$ctx:mailchimpBlocking" regex="true">

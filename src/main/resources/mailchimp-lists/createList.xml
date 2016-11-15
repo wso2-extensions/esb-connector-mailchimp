@@ -59,14 +59,14 @@
             <format>
                 {
                     "name" : "$1",
-                        "contact" : {
-                            "company" :"$2",
-                            "address1" : "$3",
-                            "city" : "$4",
-                            "state" : "$5",
-                            "zip" : "$6",
-                            "country" : "$7"
-                        },
+                    "contact" : {
+                        "company" :"$2",
+                        "address1" : "$3",
+                        "city" : "$4",
+                        "state" : "$5",
+                        "zip" : "$6",
+                        "country" : "$7"
+                    },
                     "permission_reminder" : "$8",
                     "campaign_defaults":{
                         "from_name" : "$9",
@@ -96,31 +96,31 @@
             </args>
         </payloadFactory>
         <script language="js">
-            <![CDATA[
-                var payload = mc.getPayloadJSON();
-                var address2 = mc.getProperty('address2');
-                var phone = mc.getProperty('phone');
-                var notifyOnSubscribe = mc.getProperty('notifyOnSubscribe');
-                var notifyOnUnsubscribe = mc.getProperty('notifyOnUnsubscribe');
-                var visibility = mc.getProperty('visibility');
+        <![CDATA[
+            var payload = mc.getPayloadJSON();
+            var address2 = mc.getProperty('address2');
+            var phone = mc.getProperty('phone');
+            var notifyOnSubscribe = mc.getProperty('notifyOnSubscribe');
+            var notifyOnUnsubscribe = mc.getProperty('notifyOnUnsubscribe');
+            var visibility = mc.getProperty('visibility');
 
-                if (address2 != null && address2 != "") {
-                    payload.contact.address2 = address2;
-                }
-                if (phone != null && phone != "") {
-                    payload.contact.phone = phone;
-                }
-                if (notifyOnSubscribe != null && notifyOnSubscribe != "") {
-                    payload.notify_on_subscribe = notifyOnSubscribe;
-                }
-                if (notifyOnUnsubscribe != null && notifyOnUnsubscribe != "") {
-                    payload.notify_on_unsubscribe = notifyOnUnsubscribe;
-                }
-                if (visibility != null && visibility != "") {
-                    payload.visibility = visibility;
-                }
-                mc.setPayloadJSON(payload);
-             ]]>
+            if (address2 != null && address2 != "") {
+                payload.contact.address2 = address2;
+            }
+            if (phone != null && phone != "") {
+                payload.contact.phone = phone;
+            }
+            if (notifyOnSubscribe != null && notifyOnSubscribe != "") {
+                payload.notify_on_subscribe = notifyOnSubscribe;
+            }
+            if (notifyOnUnsubscribe != null && notifyOnUnsubscribe != "") {
+                payload.notify_on_unsubscribe = notifyOnUnsubscribe;
+            }
+            if (visibility != null && visibility != "") {
+                payload.visibility = visibility;
+            }
+            mc.setPayloadJSON(payload);
+        ]]>
         </script>
         <property name="messageType" value="application/json" scope="axis2"/>
         <property name="DISABLE_CHUNKING" value="true" scope="axis2"/>

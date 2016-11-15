@@ -39,7 +39,6 @@
     <parameter name="notifyOnUnubcribe" description="The email address to send unsubscribe notifications."/>
     <parameter name="emailTypeOption" description="Boolean type, whether the list supports multiple formats for emails."/>
     <parameter name="visibility" description="Whether the list is public or private."/>
-
     <sequence>
         <property name="uri.var.listId" expression="$func:listId"/>
         <property name="address2" expression="$func:address2"/>
@@ -98,31 +97,31 @@
             </args>
         </payloadFactory>
         <script language="js">
-            <![CDATA[
-                var payload = mc.getPayloadJSON();
-                var address2 = mc.getProperty('address2');
-                var phone = mc.getProperty('phone');
-                var notifyOnSubscribe = mc.getProperty('notifyOnSubscribe');
-                var notifyOnUnsubscribe = mc.getProperty('notifyOnUnsubscribe');
-                var visibility = mc.getProperty('visibility');
+        <![CDATA[
+            var payload = mc.getPayloadJSON();
+            var address2 = mc.getProperty('address2');
+            var phone = mc.getProperty('phone');
+            var notifyOnSubscribe = mc.getProperty('notifyOnSubscribe');
+            var notifyOnUnsubscribe = mc.getProperty('notifyOnUnsubscribe');
+            var visibility = mc.getProperty('visibility');
 
-                if (address2 != null && address2 != "") {
-                    payload.contact.address2 = address2;
-                }
-                if (phone != null && phone != "") {
-                    payload.contact.phone = phone;
-                }
-                if (notifyOnSubscribe != null && notifyOnSubscribe != "") {
-                    payload.notify_on_subscribe = notifyOnSubscribe;
-                }
-                if (notifyOnUnsubscribe != null && notifyOnUnsubscribe != "") {
-                    payload.notify_on_unsubscribe = notifyOnUnsubscribe;
-                }
-                if (visibility != null && visibility != "") {
-                    payload.visibility = visibility;
-                }
-                mc.setPayloadJSON(payload);
-             ]]>
+            if (address2 != null && address2 != "") {
+                payload.contact.address2 = address2;
+            }
+            if (phone != null && phone != "") {
+                payload.contact.phone = phone;
+            }
+            if (notifyOnSubscribe != null && notifyOnSubscribe != "") {
+                payload.notify_on_subscribe = notifyOnSubscribe;
+            }
+            if (notifyOnUnsubscribe != null && notifyOnUnsubscribe != "") {
+                payload.notify_on_unsubscribe = notifyOnUnsubscribe;
+            }
+            if (visibility != null && visibility != "") {
+                payload.visibility = visibility;
+            }
+            mc.setPayloadJSON(payload);
+        ]]>
         </script>
         <property name="messageType" value="application/json" scope="axis2"/>
         <property name="DISABLE_CHUNKING" value="true" scope="axis2"/>

@@ -25,7 +25,7 @@
         <property name="uri.var.fields" expression="$func:fields"/>
         <property name="uri.var.excludeFields" expression="$func:excludeFields"/>
         <script language="js">
-            <![CDATA[
+        <![CDATA[
             var fields = mc.getProperty('uri.var.fields');
             var excludeFields = mc.getProperty('uri.var.excludeFields');
             var urlQuery = "";
@@ -40,7 +40,7 @@
                 urlQuery = '?' + urlQuery.toString().substring(0, urlQuery.toString().lastIndexOf("&"));
                 mc.setProperty('uri.var.urlQuery', urlQuery);
             }
-         ]]>
+        ]]>
         </script>
         <property name="Accept-Encoding" scope="transport" action="remove"/>
         <filter source="$ctx:mailchimpBlocking" regex="true">

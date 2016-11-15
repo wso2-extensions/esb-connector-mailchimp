@@ -47,7 +47,7 @@
             </args>
         </payloadFactory>
         <script language="js">
-            <![CDATA[
+        <![CDATA[
             var blockId = mc.getProperty('blockId');
             var payload = mc.getPayloadJSON();
 
@@ -55,7 +55,7 @@
                 payload.block_id = parseInt(blockId)
             }
             mc.setPayloadJSON(payload);
-         ]]>
+        ]]>
         </script>
         <property name="messageType" value="application/json" scope="axis2"/>
         <property name="DISABLE_CHUNKING" value="true" scope="axis2"/>
