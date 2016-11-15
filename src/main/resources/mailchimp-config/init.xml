@@ -17,26 +17,22 @@
 ~  under the License.
 -->
 <template name="init" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="apiUrl" description="Base endpoint URL of MailChimp API."/>
-    <parameter name="format" description="Format of the Response expected from the API. It can be either JSON or XML."/>
-    <parameter name="apiKey" description="API Authentication Key to access the MailChimp API."/>
+    <parameter name="apiUrl" description="The url to access the MailChimp API."/>
+    <parameter name="apiVersion" description="The version of the MailChimp API."/>
+    <parameter name="accessToken" description="The value of the Access Token to access the MailChimp API via request."/>
+    <parameter name="blocking"
+               description="The blocking parameter is helping connector performs the blocking invocations to MailChimp."/>
     <sequence>
         <property name="uri.var.apiUrl" expression="$func:apiUrl"/>
-        <property name="uri.var.format" expression="$func:format"/>
-        <property name="uri.var.apiKey" expression="$func:apiKey"/>
-        <filter source="boolean(get-property('uri.var.apiUrl'))" regex="true">
+        <property name="uri.var.apiVersion" expression="$func:apiVersion"/>
+        <property name="uri.var.accessToken" expression="$func:accessToken"/>
+        <property name="mailchimpBlocking" expression="$func:blocking"/>
+
+        <filter source="boolean($ctx:uri.var.apiVersion)" regex="false">
             <then>
-                <property name="uri.var.apiUrl" expression="fn:concat(get-property('uri.var.apiUrl'), '/2.0')"/>
-            </then>
-            <else>
-                <property name="uri.var.apiUrl" value="https://us9.api.mailchimp.com/2.0"/>
-            </else>
-        </filter>
-        <!-- If the value is not sent as part of the Request, it will be defaulted to JSON. -->
-        <filter source="boolean(get-property('uri.var.format'))" regex="false">
-            <then>
-                <property name="uri.var.format" value="json"/>
+                <property name="uri.var.apiVersion" value="3.0"/>
             </then>
         </filter>
+        <header name="Authorization" expression="fn:concat('OAuth ', $ctx:uri.var.accessToken )" scope="transport"/>
     </sequence>
 </template>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+~  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+~
+~  WSO2 Inc. licenses this file to you under the Apache License,
+~  Version 2.0 (the "License"); you may not use this file except
+~  in compliance with the License.
+~  You may obtain a copy of the License at
+~
+~    http://www.apache.org/licenses/LICENSE-2.0
+~
+~  Unless required by applicable law or agreed to in writing,
+~  software distributed under the License is distributed on an
+~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~  KIND, either express or implied.  See the License for the
+~  specific language governing permissions and limitations
+~  under the License.
+-->
+
+<template name="updateList" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="listId" description="The unique id for the list."/>
+    <parameter name="name" description="The name of the list."/>
+    <parameter name="company" description="The street address for the list contact."/>
+    <parameter name="address1" description="The street address for the list contact."/>
+    <parameter name="address2" description="The receiver of the mail."/>
+    <parameter name="city" description="The city for the list contact."/>
+    <parameter name="state" description="The state for the list contact."/>
+    <parameter name="zip" description="The postal or zip code for the list contact."/>
+    <parameter name="country" description="A two-character ISO3166 country code. Defaults to US if invalid."/>
+    <parameter name="phone" description="The phone number for the list contact."/>
+    <parameter name="permissionReminder" description="The permission reminder for the list."/>
+    <parameter name="useArchiveBar"
+               description="Boolean type, whether campaigns for this list use the Archive Bar in archives by default."/>
+    <parameter name="fromName" description="The from name for campaigns sent to this list."/>
+    <parameter name="fromEmail" description="The from email for campaigns sent to this list."/>
+    <parameter name="subject" description="The subject line for campaigns sent to this list."/>
+    <parameter name="language" description="The language for this lists’s forms."/>
+    <parameter name="notifyOnSubscribe" description="The email address to send subscribe notifications."/>
+    <parameter name="notifyOnUnubcribe" description="The email address to send unsubscribe notifications."/>
+    <parameter name="emailTypeOption" description="Boolean type, whether the list supports multiple formats for emails."/>
+    <parameter name="visibility" description="Whether the list is public or private."/>
+    <sequence>
+        <property name="uri.var.listId" expression="$func:listId"/>
+        <property name="address2" expression="$func:address2"/>
+        <property name="phone" expression="$func:phone"/>
+        <property name="useArchiveBar" expression="$func:useArchiveBar"/>
+        <property name="notifyOnSubscribe" expression="$func:notifyOnSubscribe"/>
+        <property name="notifyOnUnsubscribe" expression="$func:notifyOnUnsubscribe"/>
+        <property name="visibility" expression="$func:visibility"/>
+
+        <filter source="boolean($ctx:useArchiveBar)" regex="true">
+            <then>
+                <property name="useArchiveBar" expression="$func:useArchiveBar"/>
+            </then>
+            <else>
+                <property name="useArchiveBar" value="true"/>
+            </else>
+        </filter>
+        <payloadFactory media-type="json">
+            <format>
+                {
+                    "name" : "$1",
+                    "contact" : {
+                        "company" : "$2",
+                        "address1" : "$3",
+                        "city" : "$4",
+                        "state" : "$5",
+                        "zip" : "$6",
+                        "country" : "$7"
+                        },
+                    "permission_reminder" : "$8",
+                    "campaign_defaults" : {
+                        "from_name" : "$9",
+                        "from_email" : "$10",
+                        "subject" : "$11",
+                        "language" : "$12"
+                        },
+                    "email_type_option" : $13,
+                    "use_archive_bar" : $14
+                }
+            </format>
+            <args>
+                <arg expression="$func:name"/>
+                <arg expression="$func:company"/>
+                <arg expression="$func:address1"/>
+                <arg expression="$func:city"/>
+                <arg expression="$func:state"/>
+                <arg expression="$func:zip"/>
+                <arg expression="$func:country"/>
+                <arg expression="$func:permissionReminder"/>
+                <arg expression="$func:fromName"/>
+                <arg expression="$func:fromEmail"/>
+                <arg expression="$func:subject"/>
+                <arg expression="$func:language"/>
+                <arg expression="$func:emailTypeOption"/>
+                <arg expression="$ctx:useArchiveBar"/>
+            </args>
+        </payloadFactory>
+        <script language="js">
+        <![CDATA[
+            var payload = mc.getPayloadJSON();
+            var address2 = mc.getProperty('address2');
+            var phone = mc.getProperty('phone');
+            var notifyOnSubscribe = mc.getProperty('notifyOnSubscribe');
+            var notifyOnUnsubscribe = mc.getProperty('notifyOnUnsubscribe');
+            var visibility = mc.getProperty('visibility');
+
+            if (address2 != null && address2 != "") {
+                payload.contact.address2 = address2;
+            }
+            if (phone != null && phone != "") {
+                payload.contact.phone = phone;
+            }
+            if (notifyOnSubscribe != null && notifyOnSubscribe != "") {
+                payload.notify_on_subscribe = notifyOnSubscribe;
+            }
+            if (notifyOnUnsubscribe != null && notifyOnUnsubscribe != "") {
+                payload.notify_on_unsubscribe = notifyOnUnsubscribe;
+            }
+            if (visibility != null && visibility != "") {
+                payload.visibility = visibility;
+            }
+            mc.setPayloadJSON(payload);
+        ]]>
+        </script>
+        <property name="messageType" value="application/json" scope="axis2"/>
+        <property name="DISABLE_CHUNKING" value="true" scope="axis2"/>
+        <property name="Accept-Encoding" scope="transport" action="remove"/>
+        <filter source="$ctx:mailchimpBlocking" regex="true">
+            <then>
+                <call blocking="true">
+                    <endpoint>
+                        <http method="PATCH" uri-template="{uri.var.apiUrl}/{uri.var.apiVersion}/lists/{uri.var.listId}"/>
+                    </endpoint>
+                </call>
+            </then>
+            <else>
+                <call>
+                    <endpoint>
+                        <http method="PATCH" uri-template="{uri.var.apiUrl}/{uri.var.apiVersion}/lists/{uri.var.listId}"/>
+                    </endpoint>
+                </call>
+            </else>
+        </filter>
+    </sequence>
+</template>

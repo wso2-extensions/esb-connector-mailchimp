@@ -1,7 +1,0 @@
-{
-    "apiUrl": "%s(apiUrl)",
-	"apiKey":"%s(apiKey)",
-	"format": "json",
-    "user": true,
-    "folderId": "%s(folderId)"
-}

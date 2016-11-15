@@ -18,10 +18,10 @@
 -->
 <connector>
     <component name="mailchimp" package="org.wso2.carbon.connector">
-        <dependency component="mailchimp-template"/>
+        <dependency component="mailchimp-campaigns"/>
         <dependency component="mailchimp-config"/>
-        <dependency component="mailchimp-list"/>
-        <dependency component="mailchimp-campaign"/>
+        <dependency component="mailchimp-lists"/>
+        <dependency component="mailchimp-reports"/>
         <description>WSO2 ESB Connector Library for MailChimp.</description>
     </component>
     <icon>icon/icon-small.gif</icon>

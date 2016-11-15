@@ -1,9 +1,0 @@
-{
-   "apikey":"%s(apiKey)",
-   "id": "%s(listId)",
-   "emails": [
-        {
-            "email": "%s(emailOptional)"
-        }
-    ]
-}
