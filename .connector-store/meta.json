@@ -1,0 +1,21 @@
+{
+    "name": "MailChimp",
+    "owner": "WSO2",
+    "category": "Sales and Marketing",
+    "documentationUrl": "https://docs.wso2.com/display/ESBCONNECTORS/MailChimp+Connector",
+    "description": "The MailChimp connector allows you to access the MailChimp REST API through WSO2 ESB. MailChimp is an online email marketing solution used to manage contacts, send emails, and track results.",
+    "status": "Unsupported",
+    "labels": [
+        "connector"
+    ],
+    "releases": [
+        {
+            "tagName": "v2.0.0",
+            "products": [
+                "ESB 4.9.0",
+                "ESB 5.0.0"
+            ],
+            "isHidden": false
+        }
+    ]
+}
